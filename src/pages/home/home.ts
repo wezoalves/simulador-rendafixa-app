@@ -23,17 +23,18 @@ export class HomePage {
     let loader = this.loading.create({
         content: 'Simulando...'
     });
+
     loader.present();
     this.api.simular(valor, cdi, data);
+    
     setTimeout(() => {
       loader.dismiss();
     }, 2000);
+
     setTimeout(() => {
       this.valor = '';
       this.cdi = '';
       this.data = '';
     }, 1000);        
-
  }
-
 }

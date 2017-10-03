@@ -18,7 +18,7 @@ export class ApiProvider {
   baseUrl: string = "https://easynvestsimulatorcalcapi.azurewebsites.net/calculator/simulate/";
 
   constructor(public http: Http) {
-    //console.log('Hello ApiProvider Provider');
+    //
   }
 
   public convertDate(inputFormat) {
@@ -33,8 +33,10 @@ export class ApiProvider {
     headers.append('Access-Control-Allow-Methods','GET, POST, PATCH, PUT, DELETE, OPTIONS');
     headers.append('Access-Control-Allow-Headers','Origin, Content-Type, X-Auth-Token, X-AMZ-META-TOKEN-ID, X-AMZ-META-TOKEN-SECRET');
     let options = new RequestOptions({headers : headers});
+    
     //executa o método post na api, solicitando o novo token
     this.http.get(`${this.baseUrl}/?investedAmount=${valor}&index=CDI&rate=${cdi}&isTaxFree=false&maturityDate=${data}`, options)
+    
         //mapear a função, retornando uma response (com os dados obtidos)
         .map(res => res.json())
         .subscribe(

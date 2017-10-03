@@ -63,14 +63,14 @@ var HomePage = (function () {
         this.navCtrl = navCtrl;
         this.api = api;
         this.loading = loading;
-        this.valor = 1000;
-        this.cdi = 100;
-        this.data = '2017-12-31';
+        this.valor = '';
+        this.cdi = '';
+        this.data = '';
     }
     HomePage.prototype.simular = function (valor, data, cdi) {
         var _this = this;
         var loader = this.loading.create({
-            content: 'Simulando..'
+            content: 'Simulando...'
         });
         loader.present();
         this.api.simular(valor, cdi, data);
@@ -87,7 +87,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"C:\Users\leo\Documents\simulador-rendafixa-app\src\pages\home\home.html"*/'<ion-header>\n\n\n\n  <ion-navbar color="primary">\n\n    <ion-title text-wrap text-center>Simulação Renda Fixa</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content class="primary-font">\n\n  <div class="container">\n\n\n\n	  <ion-label text-wrap>Quanto você gostaria de aplicar? *</ion-label>\n\n      <ion-item>\n\n        <ion-input [(ngModel)]="valor"\n\n                   type="number"\n\n                   placeholder="Digite o valor"\n\n                   clearInput clearOnEdit="false">\n\n        </ion-input>\n\n      </ion-item>\n\n\n\n	  <ion-label text-wrap>Qual a data de vencimento do investimento? *</ion-label>\n\n      <ion-item>\n\n        <ion-input [(ngModel)]="data"\n\n                   type="date"\n\n                   placeholder=""\n\n                   clearInput clearOnEdit="false">\n\n        </ion-input>\n\n      </ion-item>\n\n\n\n	  <ion-label text-wrap>Qual o percentual do CDI do investimento? *</ion-label>\n\n      <ion-item>\n\n        <ion-input [(ngModel)]="cdi"\n\n                   type="number"\n\n                   placeholder="Digite o percentual"\n\n                   clearInput clearOnEdit="false">\n\n        </ion-input>\n\n      </ion-item>\n\n\n\n    <button ion-button icon-left block outline\n\n      color="light" \n\n      class="button"\n\n      (click)="simular(valor, data, cdi)">\n\n      <ion-icon name="logo-usd"></ion-icon>\n\n      Simular\n\n    </button>\n\n\n\n  </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\leo\Documents\simulador-rendafixa-app\src\pages\home\home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"C:\Users\leo\Documents\simulador-rendafixa-app\src\pages\home\home.html"*/'<ion-header>\n\n\n\n  <ion-navbar color="primary">\n\n    <ion-title text-wrap text-center>Simulação Renda Fixa</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content class="primary-font">\n\n  <div class="container">\n\n\n\n	  <ion-label text-wrap>Quanto você gostaria de aplicar? *</ion-label>\n\n      <ion-item>\n\n        <ion-input [(ngModel)]="valor"\n\n                   type="number"\n\n                   placeholder="R$"\n\n                   clearInput clearOnEdit="false">\n\n        </ion-input>\n\n      </ion-item>\n\n\n\n	  <ion-label text-wrap>Qual a data de vencimento do investimento? *</ion-label>\n\n      <ion-item>\n\n        <ion-input [(ngModel)]="data"\n\n                   type="date"\n\n                   placeholder="dia/mês/ano"\n\n                   clearInput clearOnEdit="false">\n\n        </ion-input>\n\n      </ion-item>\n\n\n\n	  <ion-label text-wrap>Qual o percentual do CDI do investimento? *</ion-label>\n\n      <ion-item>\n\n        <ion-input [(ngModel)]="cdi"\n\n                   type="number"\n\n                   placeholder="100%"\n\n                   clearInput clearOnEdit="false">\n\n        </ion-input>\n\n      </ion-item>\n\n\n\n    <button ion-button icon-left block outline\n\n      color="light" \n\n      class="button"\n\n      (click)="simular(valor, data, cdi)">\n\n      <ion-icon name="logo-usd"></ion-icon>\n\n      Simular\n\n    </button>\n\n\n\n  </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\leo\Documents\simulador-rendafixa-app\src\pages\home\home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__providers_api_api__["a" /* ApiProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* LoadingController */]])
 ], HomePage);
@@ -127,7 +127,7 @@ var ApiProvider = (function () {
     function ApiProvider(http) {
         this.http = http;
         this.baseUrl = "https://easynvestsimulatorcalcapi.azurewebsites.net/calculator/simulate/";
-        //console.log('Hello ApiProvider Provider');
+        //
     }
     ApiProvider.prototype.convertDate = function (inputFormat) {
         function pad(s) { return (s < 10) ? '0' + s : s; }
@@ -156,10 +156,9 @@ var ApiProvider = (function () {
 }());
 ApiProvider = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
 ], ApiProvider);
 
-var _a;
 //# sourceMappingURL=api.js.map
 
 /***/ }),
