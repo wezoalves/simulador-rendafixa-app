@@ -27,7 +27,7 @@ export class ApiProvider {
     return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
   }
 
-  public simular(valor, cdi, data){
+  public simular(valor, taxa, data){
     let headers = new Headers
     headers.append('Content-Type','application/x-www-form-urlencoded');
     headers.append('Access-Control-Allow-Methods','GET, POST, PATCH, PUT, DELETE, OPTIONS');
@@ -35,7 +35,7 @@ export class ApiProvider {
     let options = new RequestOptions({headers : headers});
     
     //executa o método post na api, solicitando o novo token
-    this.http.get(`${this.baseUrl}/?investedAmount=${valor}&index=CDI&rate=${cdi}&isTaxFree=false&maturityDate=${data}`, options)
+    this.http.get(`${this.baseUrl}/?investedAmount=${valor}&index=CDI&rate=${taxa}&isTaxFree=false&maturityDate=${data}`, options)
     
         //mapear a função, retornando uma response (com os dados obtidos)
         .map(res => res.json())

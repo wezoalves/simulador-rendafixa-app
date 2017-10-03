@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Observable } from 'rxjs/Rx';
+import { ToastController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { LoadingController } from 'ionic-angular';
 
@@ -11,30 +12,49 @@ import { ApiProvider } from '../../providers/api/api'
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+
 export class HomePage {
-  valor; data; cdi;
-  constructor(public navCtrl: NavController, public api: ApiProvider, public loading: LoadingController) {
+  valor; data; taxa;
+  constructor(public navCtrl: NavController, 
+              public api: ApiProvider, 
+              private toast: ToastController,
+              public loading: LoadingController) {
     this.valor = '';
-    this.cdi = '';
+    this.taxa = '';
     this.data = '';
   }
 
-  public simular(valor, data, cdi){
-    let loader = this.loading.create({
-        content: 'Simulando...'
-    });
-
-    loader.present();
-    this.api.simular(valor, cdi, data);
+  public validate(valor, data, taxa) {
     
-    setTimeout(() => {
-      loader.dismiss();
-    }, 2000);
+    if ((valor == '') || (taxa == '') || (data == '')) {
 
-    setTimeout(() => {
-      this.valor = '';
-      this.cdi = '';
-      this.data = '';
-    }, 1000);        
+      let toast = this.toast.create({
+        message: 'Informar todos os campos',
+        duration: 5000,
+        position: 'bottom'
+      });
+
+      toast.present();
+      return false
+    } else {
+      return true
+    }
+  }
+
+  public simular(valor, data, taxa) {
+
+    if (this.validate(valor, data, taxa)) {
+
+      let loader = this.loading.create({
+        content: 'Simulando...'
+      });
+
+      loader.present();
+      this.api.simular(valor, taxa, data);
+      
+      setTimeout(() => {
+        loader.dismiss();
+      }, 2000);
+    }
  }
 }
