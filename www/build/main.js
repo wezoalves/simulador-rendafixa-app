@@ -87,7 +87,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"C:\Users\leo\Documents\simulador-rendafixa-app\src\pages\home\home.html"*/'<ion-header>\n\n\n\n  <ion-navbar color="primary">\n\n    <ion-title text-center>Renda Fixa</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content class="primary-font">\n\n  <div class="container">\n\n\n\n	  <ion-label text-wrap>Quanto você gostaria de aplicar? *</ion-label>\n\n      <ion-item>\n\n        <ion-input [(ngModel)]="valor"\n\n                   type="number"\n\n                   placeholder="Digite o valor"\n\n                   clearInput clearOnEdit="false">\n\n        </ion-input>\n\n      </ion-item>\n\n\n\n	  <ion-label text-wrap>Qual a data de vencimento do investimento? *</ion-label>\n\n      <ion-item>\n\n        <ion-input [(ngModel)]="data"\n\n                   type="date"\n\n                   placeholder=""\n\n                   clearInput clearOnEdit="false">\n\n        </ion-input>\n\n      </ion-item>\n\n\n\n	  <ion-label text-wrap>Qual o percentual do CDI do investimento? *</ion-label>\n\n      <ion-item>\n\n        <ion-input [(ngModel)]="cdi"\n\n                   type="number"\n\n                   placeholder="Digite o percentual"\n\n                   clearInput clearOnEdit="false">\n\n        </ion-input>\n\n      </ion-item>\n\n\n\n    <button ion-button icon-left block outline color="light" class="button" (click)="simular(valor, data, cdi)"><ion-icon name="logo-usd"></ion-icon>Simular</button>\n\n\n\n  </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\leo\Documents\simulador-rendafixa-app\src\pages\home\home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"C:\Users\leo\Documents\simulador-rendafixa-app\src\pages\home\home.html"*/'<ion-header>\n\n\n\n  <ion-navbar color="primary">\n\n    <ion-title text-wrap text-center>Simulação Renda Fixa</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content class="primary-font">\n\n  <div class="container">\n\n\n\n	  <ion-label text-wrap>Quanto você gostaria de aplicar? *</ion-label>\n\n      <ion-item>\n\n        <ion-input [(ngModel)]="valor"\n\n                   type="number"\n\n                   placeholder="Digite o valor"\n\n                   clearInput clearOnEdit="false">\n\n        </ion-input>\n\n      </ion-item>\n\n\n\n	  <ion-label text-wrap>Qual a data de vencimento do investimento? *</ion-label>\n\n      <ion-item>\n\n        <ion-input [(ngModel)]="data"\n\n                   type="date"\n\n                   placeholder=""\n\n                   clearInput clearOnEdit="false">\n\n        </ion-input>\n\n      </ion-item>\n\n\n\n	  <ion-label text-wrap>Qual o percentual do CDI do investimento? *</ion-label>\n\n      <ion-item>\n\n        <ion-input [(ngModel)]="cdi"\n\n                   type="number"\n\n                   placeholder="Digite o percentual"\n\n                   clearInput clearOnEdit="false">\n\n        </ion-input>\n\n      </ion-item>\n\n\n\n    <button ion-button icon-left block outline\n\n      color="light" \n\n      class="button"\n\n      (click)="simular(valor, data, cdi)">\n\n      <ion-icon name="logo-usd"></ion-icon>\n\n      Simular\n\n    </button>\n\n\n\n  </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\leo\Documents\simulador-rendafixa-app\src\pages\home\home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__providers_api_api__["a" /* ApiProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* LoadingController */]])
 ], HomePage);
@@ -127,9 +127,15 @@ var ApiProvider = (function () {
     function ApiProvider(http) {
         this.http = http;
         this.baseUrl = "https://easynvestsimulatorcalcapi.azurewebsites.net/calculator/simulate/";
-        console.log('Hello ApiProvider Provider');
+        //console.log('Hello ApiProvider Provider');
     }
+    ApiProvider.prototype.convertDate = function (inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
+    };
     ApiProvider.prototype.simular = function (valor, cdi, data) {
+        var _this = this;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */];
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         headers.append('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
@@ -141,7 +147,7 @@ var ApiProvider = (function () {
             .subscribe(
         //deu certo e trouxe resultado em JSON, transferi pra variavel "data" e poder ler cada campo do json
         function (data) {
-            alert("                  Resultado da simula\u00E7\u00E3o: R$ " + data.grossAmount + "\n                   Rendimento total de: R$ " + data.grossAmountProfit + "\n\n                   Valor aplicado inicialmente: R$ " + data.investmentParameter.investedAmount + "\n                   Valor bruto do investimento: R$ " + data.grossAmountProfit + "\n                   Valor do rendimento: R$ " + data.grossAmountProfit + "\n                   IR sobre o investimento: " + data.taxesAmount + " (" + data.taxesRate + "%)\n                   Valor l\u00EDquido do investimento: R$ " + data.netAmount + "\n\n                   Data de resgate: " + data.investmentParameter.maturityDate + "\n                   Dias corridos: " + data.investmentParameter.maturityTotalDays + "\n                   Rendimento mensal: " + data.monthlyGrossRateProfit + "%\n                   Percentual do CDI do papel: " + data.investmentParameter.rate + "%\n                   Rentabilidade anual: " + data.investmentParameter.yearlyInterestRate + "%\n                   Rentabilidade no per\u00EDodo: " + data.annualGrossRateProfit + "%\n                  ");
+            alert("                  \n                   Resultado da simula\u00E7\u00E3o: R$ " + data.grossAmount + "\n                   Rendimento total de: R$ " + data.grossAmountProfit + "\n\n                   Valor aplicado inicialmente: R$ " + data.investmentParameter.investedAmount + "\n                   Valor bruto do investimento: R$ " + data.grossAmountProfit + "\n                   Valor do rendimento: R$ " + data.grossAmountProfit + "\n                   IR sobre o investimento: " + data.taxesAmount + " (" + data.taxesRate + "%)\n                   Valor l\u00EDquido do investimento: R$ " + data.netAmount + "\n\n                   Data de resgate: " + _this.convertDate(data.investmentParameter.maturityDate) + "\n                   Dias corridos: " + data.investmentParameter.maturityTotalDays + "\n                   Rendimento mensal: " + data.monthlyGrossRateProfit + "%\n                   Percentual do CDI do papel: " + data.investmentParameter.rate + "%\n                   Rentabilidade anual: " + data.investmentParameter.yearlyInterestRate + "%\n                   Rentabilidade no per\u00EDodo: " + data.annualGrossRateProfit + "%\n                  ");
         }, function (err) {
             alert(err);
         });
@@ -150,9 +156,10 @@ var ApiProvider = (function () {
 }());
 ApiProvider = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
 ], ApiProvider);
 
+var _a;
 //# sourceMappingURL=api.js.map
 
 /***/ }),

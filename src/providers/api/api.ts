@@ -21,6 +21,12 @@ export class ApiProvider {
     //console.log('Hello ApiProvider Provider');
   }
 
+  public convertDate(inputFormat) {
+    function pad(s) { return (s < 10) ? '0' + s : s; }
+    let d = new Date(inputFormat)
+    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+  }
+
   public simular(valor, cdi, data){
     let headers = new Headers
     headers.append('Content-Type','application/x-www-form-urlencoded');
@@ -34,7 +40,8 @@ export class ApiProvider {
         .subscribe(
           //deu certo e trouxe resultado em JSON, transferi pra variavel "data" e poder ler cada campo do json
           data=>{
-            alert(`                  Resultado da simulação: R$ ${data.grossAmount}
+            alert(`                  
+                   Resultado da simulação: R$ ${data.grossAmount}
                    Rendimento total de: R$ ${data.grossAmountProfit}
 
                    Valor aplicado inicialmente: R$ ${data.investmentParameter.investedAmount}
@@ -43,7 +50,7 @@ export class ApiProvider {
                    IR sobre o investimento: ${data.taxesAmount} (${data.taxesRate}%)
                    Valor líquido do investimento: R$ ${data.netAmount}
 
-                   Data de resgate: ${data.investmentParameter.maturityDate}
+                   Data de resgate: ${this.convertDate(data.investmentParameter.maturityDate)}
                    Dias corridos: ${data.investmentParameter.maturityTotalDays}
                    Rendimento mensal: ${data.monthlyGrossRateProfit}%
                    Percentual do CDI do papel: ${data.investmentParameter.rate}%

@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title text-center>Renda Fixa</ion-title>
+    <ion-title text-wrap text-center>Simulação Renda Fixa</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -36,7 +36,13 @@
         </ion-input>
       </ion-item>
 
-    <button ion-button icon-left block outline color="light" class="button" (click)="simular(valor, data, cdi)"><ion-icon name="logo-usd"></ion-icon>Simular</button>
+    <button ion-button icon-left block outline
+      color="light" 
+      class="button"
+      (click)="simular(valor, data, cdi)">
+      <ion-icon name="logo-usd"></ion-icon>
+      Simular
+    </button>
 
   </div>
 
