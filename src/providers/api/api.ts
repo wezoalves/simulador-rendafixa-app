@@ -18,7 +18,7 @@ export class ApiProvider {
   baseUrl: string = "https://easynvestsimulatorcalcapi.azurewebsites.net/calculator/simulate/";
 
   constructor(public http: Http) {
-    console.log('Hello ApiProvider Provider');
+    //console.log('Hello ApiProvider Provider');
   }
 
   public simular(valor, cdi, data){
@@ -56,5 +56,4 @@ export class ApiProvider {
           }
         );
   }
-
 }

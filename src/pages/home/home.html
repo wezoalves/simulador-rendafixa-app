@@ -9,7 +9,7 @@
 <ion-content class="primary-font">
   <div class="container">
 
-	  <ion-label>Quanto você gostaria de aplicar?</ion-label>
+	  <ion-label text-wrap>Quanto você gostaria de aplicar? *</ion-label>
       <ion-item>
         <ion-input [(ngModel)]="valor"
                    type="number"
@@ -18,7 +18,7 @@
         </ion-input>
       </ion-item>
 
-	  <ion-label>Qual a data de vencimento do papel?</ion-label>
+	  <ion-label text-wrap>Qual a data de vencimento do investimento? *</ion-label>
       <ion-item>
         <ion-input [(ngModel)]="data"
                    type="date"
@@ -27,7 +27,7 @@
         </ion-input>
       </ion-item>
 
-	  <ion-label>Qual o percentual do CDI do papel?</ion-label>
+	  <ion-label text-wrap>Qual o percentual do CDI do investimento? *</ion-label>
       <ion-item>
         <ion-input [(ngModel)]="cdi"
                    type="number"
@@ -39,7 +39,5 @@
     <button ion-button icon-left block outline color="light" class="button" (click)="simular(valor, data, cdi)"><ion-icon name="logo-usd"></ion-icon>Simular</button>
 
   </div>
-
-
 
 </ion-content>
