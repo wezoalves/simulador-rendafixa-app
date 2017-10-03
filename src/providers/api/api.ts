@@ -42,23 +42,25 @@ export class ApiProvider {
         .subscribe(
           //deu certo e trouxe resultado em JSON, transferi pra variavel "data" e poder ler cada campo do json
           data=>{
-            alert(`                  
-                   Resultado da simulação: R$ ${data.grossAmount}
-                   Rendimento total de: R$ ${data.grossAmountProfit}
+            let textElement = document.createElement('p');
+            textElement.textContent = `                  
+             Resultado da simulação: R$ ${data.grossAmount}
+             Rendimento total de: R$ ${data.grossAmountProfit}
 
-                   Valor aplicado inicialmente: R$ ${data.investmentParameter.investedAmount}
-                   Valor bruto do investimento: R$ ${data.grossAmountProfit}
-                   Valor do rendimento: R$ ${data.grossAmountProfit}
-                   IR sobre o investimento: ${data.taxesAmount} (${data.taxesRate}%)
-                   Valor líquido do investimento: R$ ${data.netAmount}
+             Valor aplicado inicialmente: R$ ${data.investmentParameter.investedAmount}
+             Valor bruto do investimento: R$ ${data.grossAmountProfit}
+             Valor do rendimento: R$ ${data.grossAmountProfit}
+             IR sobre o investimento: ${data.taxesAmount} (${data.taxesRate}%)
+             Valor líquido do investimento: R$ ${data.netAmount}
 
-                   Data de resgate: ${this.convertDate(data.investmentParameter.maturityDate)}
-                   Dias corridos: ${data.investmentParameter.maturityTotalDays}
-                   Rendimento mensal: ${data.monthlyGrossRateProfit}%
-                   Percentual do CDI do papel: ${data.investmentParameter.rate}%
-                   Rentabilidade anual: ${data.investmentParameter.yearlyInterestRate}%
-                   Rentabilidade no período: ${data.annualGrossRateProfit}%
-                  `)
+             Data de resgate: ${this.convertDate(data.investmentParameter.maturityDate)}
+             Dias corridos: ${data.investmentParameter.maturityTotalDays}
+             Rendimento mensal: ${data.monthlyGrossRateProfit}%
+             Percentual do CDI do papel: ${data.investmentParameter.rate}%
+             Rentabilidade anual: ${data.investmentParameter.yearlyInterestRate}%
+             Rentabilidade no período: ${data.annualGrossRateProfit}%
+            `;
+            document.body.appendChild(textElement);
           },
           err=>{
             alert(err);
