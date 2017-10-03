@@ -57,3 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+/www
+/hooks
+/.sourcemaps
+/plugins
+/platforms
